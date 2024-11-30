@@ -3,6 +3,9 @@ import React from "react";
 import ScreenWrapper from "../Components/ScreenWrapper";
 import { colors } from "../Theme";
 import randomImage from "../assets/images/randomImage";
+import EmptyListComponent from "../Components/EmptyListComponent";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamsList } from "../navigation/AppNavigation";
 
 
 const items = [
@@ -43,7 +46,10 @@ const items = [
     },
 ]
 
-const HomeScreen: React.FC = (): React.JSX.Element => {
+type HomeScreenProps = NativeStackScreenProps<RootStackParamsList , "Home">
+
+
+const HomeScreen: React.FC<HomeScreenProps> = ({navigation}): React.JSX.Element => {
     return (
         <ScreenWrapper className="flex-1">
             <View className="flex-row justify-between items-center p-4">
@@ -61,7 +67,7 @@ const HomeScreen: React.FC = (): React.JSX.Element => {
             <View className="px-4">
                 <View className="flex-row justify-between items-center mb-3">
                     <Text className={`${colors.heading} font-bold text-xl`}>Recent Trips</Text>
-                    <TouchableOpacity className="bg-white p-2 px-4 border border-gray-200 rounded-full">
+                    <TouchableOpacity onPress={() => navigation.navigate("AddTrip")} className="bg-white p-2 px-4 border border-gray-200 rounded-full">
                         <Text>Add Trip</Text>
                     </TouchableOpacity>
                 </View>
@@ -69,6 +75,7 @@ const HomeScreen: React.FC = (): React.JSX.Element => {
                     <FlatList
                         contentContainerStyle={{paddingBottom:25}}
                         data={items}
+                        ListEmptyComponent={<EmptyListComponent message={"You have not added any trips yet !"}/>}
                         numColumns={2}
                         keyExtractor={item => item.id.toString()}
                         showsVerticalScrollIndicator={false}
