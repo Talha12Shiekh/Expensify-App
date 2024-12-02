@@ -11,7 +11,7 @@ const AddTripsScreen = (): React.JSX.Element => {
   const [place,setplace] = useState<string>("");
   const [country,setcountry] = useState<string>("");
 
-  type NavigationProps = NativeStackNavigationProp<RootStackParamsList,"AddTrip">;
+  type NavigationProps = NativeStackNavigationProp<RootStackParamsList,"Home">;
 
   const navigation = useNavigation<NavigationProps>();
 
