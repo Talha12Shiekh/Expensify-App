@@ -5,5 +5,5 @@ interface ColorProps {
 
 export const colors : ColorProps = {
     heading:"text-gray-700",
-    button:"#50CBF8"
+    button:"#008000a8"
 }

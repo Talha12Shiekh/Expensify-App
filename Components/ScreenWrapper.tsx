@@ -6,7 +6,7 @@ interface ScreenWrapperProps extends ViewProps {
 }
 
 const ScreenWrapper = ({ children,...rest }: ScreenWrapperProps): React.JSX.Element => {
-    const paddingTop = StatusBar.currentHeight ? StatusBar.currentHeight :15;
+    const paddingTop = StatusBar.currentHeight ? StatusBar.currentHeight :0;
 
     return <View
         style={{ paddingTop }}
