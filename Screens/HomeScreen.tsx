@@ -30,23 +30,23 @@ const items = [
         country: "America"
     },
     {
-        id: 4,
-        place: "New York",
-        country: "America"
-    },
-    {
-        id: 4,
-        place: "New York",
-        country: "America"
-    },
-    {
         id: 5,
+        place: "New York",
+        country: "America"
+    },
+    {
+        id: 6,
+        place: "New York",
+        country: "America"
+    },
+    {
+        id: 7,
         place: "New York",
         country: "America"
     },
 ]
 
-type HomeScreenProps = NativeStackScreenProps<RootStackParamsList , "Home">
+type HomeScreenProps = NativeStackScreenProps<RootStackParamsList , "Home">;
 
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}): React.JSX.Element => {
@@ -83,7 +83,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}): React.JSX.Element 
                         
                         renderItem={({ item }) => {
                             return (
-                                <TouchableOpacity className="bg-white py-3 mb-2 rounded-2xl px-9">
+                                <TouchableOpacity onPress={() => navigation.navigate("TripsExpense",{...item})} className="bg-white py-3 mb-2 rounded-2xl px-9">
                                     <View>
                                         <Image
                                         source={randomImage()}

@@ -17,7 +17,7 @@ const AddTripsScreen = (): React.JSX.Element => {
 
   function handleAddTrip() : void {
     if(place && country){
-      navigation.navigate("Home")
+      navigation.goBack()
     }else {
 
     }
