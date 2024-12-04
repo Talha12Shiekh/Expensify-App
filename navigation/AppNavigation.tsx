@@ -12,8 +12,10 @@ export type RootStackParamsList = {
     AddTrip:undefined,
     Login:undefined,
     AddExpense:undefined,
-    TripsExpense:undefined,
-    
+    TripsExpense:{
+        place:string,
+        country:string
+    },
 }
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();

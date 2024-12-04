@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 import ScreenWrapper from '../Components/ScreenWrapper'
 import { colors } from '../Theme'
 import BackButton from '../Components/BackButton'
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '../navigation/AppNavigation';
+import { CATEGORIES } from '../Constants'
 
-type AddExpensesScreenProps = NativeStackNavigationProp<RootStackParamsList,"AddExpense">;
+type AddExpensesScreenProps = NativeStackScreenProps<RootStackParamsList,"AddExpense">;
 
 const AddExpensesScreen: React.FC<AddExpensesScreenProps> = ({navigation}): React.JSX.Element => {
   const [title,settitle] = useState<string>("");
@@ -59,6 +60,16 @@ const AddExpensesScreen: React.FC<AddExpensesScreenProps> = ({navigation}): Reac
           </View>
           <View className='mx-4'>
             |<Text className={`${colors.heading} text-xl mb-2 ml-2 font-bold`}>Category</Text>
+            <View className='flex-row flex-wrap items-center gap-4'>
+              {
+                CATEGORIES.map(cate => {
+                    return <TouchableOpacity key={cate.value} className='rounded-full bg-white p-3 px-4'>
+                      
+                      <Text className='text-lg'>{cate.title}</Text>
+                    </TouchableOpacity>
+                })
+              }
+            </View>
           </View>
         </View>
         <View>

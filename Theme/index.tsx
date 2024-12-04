@@ -8,7 +8,15 @@ export const colors : ColorProps = {
     button:"#008000a8"
 }
 
-export const CategoryBG = {
+interface CategoriesProps {
+    food:string,
+    commute:string,
+    shopping:string,
+    entertainment:string,
+    other:string,
+}
+
+export const CategoryBG : CategoriesProps = {
     food:"#E1D3EE",
     commute:"#B8E3D3",
     shopping:"#EcFAD7",

@@ -35,7 +35,7 @@ type TripsExpenseScreenProps = NativeStackScreenProps<RootStackParamsList, "Trip
 
 
 const TripExpensesScreen: React.FC<TripsExpenseScreenProps> = ({ navigation,route }): React.JSX.Element => {
-  const { id , place , country } = route.params;
+  const {  place , country } = route.params;
   return (
     <ScreenWrapper className="flex-1">
       <View className="px-4">
