@@ -14,7 +14,7 @@ const AddExpensesScreen: React.FC<AddExpensesScreenProps> = ({navigation}): Reac
   const [amount,setamount] = useState<string>("");
   const [category,setcategory] = useState<string>("");
 
-  function handleAddTrip() : void {
+  function handleAddExpense() : void {
     if(title && amount && category){
       navigation.goBack()
     }else {
@@ -34,7 +34,7 @@ const AddExpensesScreen: React.FC<AddExpensesScreenProps> = ({navigation}): Reac
           </View>
           <View className='flex-row justify-center my-3 mt-9'>
             <Image
-              source={require("../assets/images/4.png")}
+              source={require("../assets/images/expenseBanner.png")}
               className='h-72 w-72'
             />
           </View>
@@ -59,11 +59,12 @@ const AddExpensesScreen: React.FC<AddExpensesScreenProps> = ({navigation}): Reac
             </View>
           </View>
           <View className='mx-4'>
-            |<Text className={`${colors.heading} text-xl mb-2 ml-2 font-bold`}>Category</Text>
-            <View className='flex-row flex-wrap items-center gap-4'>
+            <Text className={`${colors.heading} text-xl mb-2 ml-2 font-bold`}>Category</Text>
+            <View className='flex-row flex-wrap items-center gap-1 gap-y-3'>
               {
                 CATEGORIES.map(cate => {
-                    return <TouchableOpacity key={cate.value} className='rounded-full bg-white p-3 px-4'>
+                    const bgcolor = cate.value === category ? "bg-green-200" : "bg-white";
+                    return <TouchableOpacity onPress={() => setcategory(cate.value)} key={cate.value} className={`rounded-full bg-white p-2 px-6 mr-2 ${bgcolor}`}>
                       
                       <Text className='text-lg'>{cate.title}</Text>
                     </TouchableOpacity>
@@ -73,8 +74,8 @@ const AddExpensesScreen: React.FC<AddExpensesScreenProps> = ({navigation}): Reac
           </View>
         </View>
         <View>
-            <TouchableOpacity onPress={handleAddTrip} style={{backgroundColor:colors.button}} className='my-6 rounded-full p-4 mx-4'>
-              <Text className='text-center text-white text-xl font-bold'>Add Trip</Text>
+            <TouchableOpacity onPress={handleAddExpense} className='my-6 rounded-full p-4 mx-4 bg-green-600'>
+              <Text className='text-center text-white text-xl font-bold'>Add Expense</Text>
             </TouchableOpacity>
         </View>
       </View>
