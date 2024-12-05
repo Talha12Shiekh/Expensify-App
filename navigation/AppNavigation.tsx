@@ -6,9 +6,13 @@ import AddTripsScreen from '../Screens/AddTripsScreen';
 import AddExpenseScreen from '../Screens/AddExpenseScreen';
 import TripExpensesScreen from '../Screens/TripExpensesScreen';
 import WelcomeScreen from '../Screens/WelcomeScreen';
+import SignInScreen from '../Screens/SignInScreen';
+import SignOutScreen from '../Screens/SignOutScreen';
 
 
 export type RootStackParamsList = {
+    SignIn:undefined,
+    SignOut:undefined,
     Home:undefined,
     AddTrip:undefined,
     Login:undefined,
@@ -26,6 +30,8 @@ export default function AppNavigation() : React.JSX.Element {
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='Welcome'>
+                <Stack.Screen options={{presentation:"modal"}} name="SignIn" component={SignInScreen} />
+                <Stack.Screen options={{presentation:"modal"}} name="SignOut" component={SignOutScreen} />
                 <Stack.Screen name="Welcome" component={WelcomeScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
