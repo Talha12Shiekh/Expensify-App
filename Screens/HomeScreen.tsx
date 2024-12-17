@@ -1,11 +1,13 @@
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import ScreenWrapper from "../Components/ScreenWrapper";
 import { colors } from "../Theme";
 import randomImage from "../assets/images/randomImage";
 import EmptyListComponent from "../Components/EmptyListComponent";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamsList } from "../navigation/AppNavigation";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 
 const items = [

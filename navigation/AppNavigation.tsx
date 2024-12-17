@@ -8,6 +8,9 @@ import TripExpensesScreen from '../Screens/TripExpensesScreen';
 import WelcomeScreen from '../Screens/WelcomeScreen';
 import SignInScreen from '../Screens/SignInScreen';
 import SignOutScreen from '../Screens/SignOutScreen';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { Text } from 'react-native';
 
 
 export type RootStackParamsList = {
@@ -27,18 +30,31 @@ export type RootStackParamsList = {
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 
 export default function AppNavigation() : React.JSX.Element {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='Welcome'>
-                <Stack.Screen options={{presentation:"modal"}} name="SignIn" component={SignInScreen} />
-                <Stack.Screen options={{presentation:"modal"}} name="SignOut" component={SignOutScreen} />
-                <Stack.Screen name="Welcome" component={WelcomeScreen} />
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="AddTrip" component={AddTripsScreen} />
-                <Stack.Screen name="AddExpense" component={AddExpenseScreen} />
-                <Stack.Screen name="TripsExpense" component={TripExpensesScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
+    const {user} = useSelector((state: RootState) => state.user);
+
+
+    if(user){
+
+        return (
+            <NavigationContainer>
+                <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='Welcome'>
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="Login" component={LoginScreen} />
+                    <Stack.Screen name="AddTrip" component={AddTripsScreen} />
+                    <Stack.Screen name="AddExpense" component={AddExpenseScreen} />
+                    <Stack.Screen name="TripsExpense" component={TripExpensesScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
+    }else {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='Welcome'>
+                    <Stack.Screen options={{presentation:"modal"}} name="SignIn" component={SignInScreen} />
+                    <Stack.Screen options={{presentation:"modal"}} name="SignOut" component={SignOutScreen} />
+                    <Stack.Screen name="Welcome" component={WelcomeScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
+    }
 }
