@@ -6,8 +6,8 @@ import randomImage from "../assets/images/randomImage";
 import EmptyListComponent from "../Components/EmptyListComponent";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamsList } from "../navigation/AppNavigation";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { signOut } from "firebase/auth";
+import { auth } from "../Config/firebase";
 
 
 const items = [
@@ -52,11 +52,16 @@ type HomeScreenProps = NativeStackScreenProps<RootStackParamsList , "Home">;
 
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}): React.JSX.Element => {
+
+    async function handleLogout(){
+        await signOut(auth)
+    }
+
     return (
         <ScreenWrapper className="flex-1">
             <View className="flex-row justify-between items-center p-4">
                 <Text className={`text-4xl ${colors.heading} font-bold`}>Expensify</Text>
-                <TouchableOpacity className="bg-white p-2 px-4 border border-gray-200 rounded-full">
+                <TouchableOpacity onPress={handleLogout} className="bg-white p-2 px-4 border border-gray-200 rounded-full">
                     <Text className={colors.heading}>Logout</Text>
                 </TouchableOpacity>
             </View>

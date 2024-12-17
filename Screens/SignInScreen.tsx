@@ -2,7 +2,15 @@ import React, { useState } from 'react'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '../navigation/AppNavigation';
 import InputAndImageReusableScreen from '../Components/InputAndImageReusableScreen'
+import Snackbar from 'react-native-snackbar';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../Config/firebase';
 
+// import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+// import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+// const auth = initializeAuth(app, {
+//   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+// });
 
 
 type NavigationProps = NativeStackScreenProps<RootStackParamsList, "SignIn">;
@@ -11,11 +19,14 @@ const SignInScreen: React.FC<NavigationProps> = ({ navigation }): React.JSX.Elem
   const [email, setemail] = useState<string>("");
   const [password, setpassword] = useState<string>("");
 
-  function handleSubmit(): void {
+  async function handleSubmit() {
     if (email && password) {
-      navigation.navigate("Home")
+      await signInWithEmailAndPassword(auth,email,password);
     } else {
-
+      Snackbar.show({
+        text: 'Email and password are required',
+        backgroundColor: "red"
+    });
     }
   }
 

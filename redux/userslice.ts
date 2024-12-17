@@ -2,13 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 // Define a type for the slice state
-interface UserState {
-  user: string | null,
-  userLoading:boolean | null
-}
 
 // Define the initial state using that type
-const initialState: UserState = {
+const initialState = {
   user:null,
   userLoading:null
 }
@@ -19,10 +15,10 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    setusers: (state, action: PayloadAction<string>) => {
+    setusers: (state, action) => {
      state.user = action.payload
     },
-    setUserLoading: (state, action: PayloadAction<boolean>) => {
+    setUserLoading: (state, action) => {
      state.userLoading = action.payload
     },
   },
