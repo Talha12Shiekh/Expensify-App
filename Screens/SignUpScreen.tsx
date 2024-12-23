@@ -11,6 +11,8 @@ import { RootState } from '../redux/store';
 
 type NavigationProps = NativeStackScreenProps<RootStackParamsList, "SignUp">;
 
+// tk123@gmail.com
+// Tk123456
 const SignUpScreen: React.FC<NavigationProps> = ({ navigation }): React.JSX.Element => {
     const [email, setemail] = useState<string>("");
     const [password, setpassword] = useState<string>("");
@@ -27,10 +29,12 @@ const SignUpScreen: React.FC<NavigationProps> = ({ navigation }): React.JSX.Elem
                 dispatch(setUserLoading(false))
                 
             } catch (error) {
-                console.log(error)
+                console.log(error);
+                dispatch(setUserLoading(false));
             }
         } else {
             Snackbar.show({
+
                 text: 'Email and password are required',
                 backgroundColor: "red"
             });

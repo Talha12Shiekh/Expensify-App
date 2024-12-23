@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import InputAndImageReusableScreen from '../Components/InputAndImageReusableScreen';
 import { RootStackParamsList } from '../navigation/AppNavigation';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import Snackbar from 'react-native-snackbar';
+import { addDoc } from 'firebase/firestore';
+import { tripsRef } from '../Config/firebase';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 
 type AddTripsScreenProps = NativeStackScreenProps<RootStackParamsList, "AddTrip">;
@@ -9,12 +14,28 @@ type AddTripsScreenProps = NativeStackScreenProps<RootStackParamsList, "AddTrip"
 const AddTripsScreen: React.FC<AddTripsScreenProps> = ({ navigation }): React.JSX.Element => {
   const [place, setplace] = useState<string>("");
   const [country, setcountry] = useState<string>("");
+  const [loading, setloading] = useState<boolean>(false);
+  const { user } = useSelector((state: RootState) => state.user);
 
-  function handleAddTrip(): void {
+
+  async function handleAddTrip() {
     if (place && country) {
-      navigation.goBack()
-    } else {
+      setloading(true);
 
+      let doc = await addDoc(tripsRef, {
+        place, country, userId: user.uid
+      });
+
+      setloading(false);
+
+      if(doc && doc.id){
+        navigation.goBack()
+      }
+    } else {
+      Snackbar.show({
+        text: 'Place and country are required',
+        backgroundColor: "red"
+      });
     }
   }
 
@@ -32,6 +53,7 @@ const AddTripsScreen: React.FC<AddTripsScreenProps> = ({ navigation }): React.JS
       onPress={handleAddTrip}
       finputtext='Where on Earth ?'
       sinputtext='Which country'
+      userLoading={loading}
     />
   )
 }

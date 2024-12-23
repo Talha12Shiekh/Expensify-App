@@ -1,25 +1,39 @@
-import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import ScreenWrapper from '../Components/ScreenWrapper'
-import { colors } from '../Theme'
-import BackButton from '../Components/BackButton'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '../navigation/AppNavigation';
-import { CATEGORIES } from '../Constants'
 import InputAndImageReusableScreen from '../Components/InputAndImageReusableScreen'
+import Snackbar from 'react-native-snackbar';
+import { addDoc } from 'firebase/firestore';
+import { expensesRef } from '../Config/firebase';
 
 type AddExpensesScreenProps = NativeStackScreenProps<RootStackParamsList,"AddExpense">;
 
-const AddExpensesScreen: React.FC<AddExpensesScreenProps> = ({navigation}): React.JSX.Element => {
+const AddExpensesScreen: React.FC<AddExpensesScreenProps> = ({navigation,route}): React.JSX.Element => {
+  const { id } = route.params;
   const [title,settitle] = useState<string>("");
   const [amount,setamount] = useState<string>("");
   const [category,setcategory] = useState<string>("");
+  const [loading,setloading] = useState<boolean>(false);
 
-  function handleAddExpense() : void {
+  async function handleAddExpense()  {
     if(title && amount && category){
-      navigation.goBack()
-    }else {
+      setloading(true);
 
+      let doc = await addDoc(expensesRef,{
+        title,
+        amount,
+        category,
+        tripId:id
+      });
+
+      setloading(false);
+
+      if(doc && doc.id) navigation.goBack()
+    }else {
+      Snackbar.show({
+        text:"Please fill all the fields",
+        backgroundColor:"red"
+      })
     }
   }
 
@@ -38,6 +52,7 @@ const AddExpensesScreen: React.FC<AddExpensesScreenProps> = ({navigation}): Reac
     onPress={handleAddExpense}
     category={category}
     setcategory={setcategory}
+    userLoading={loading}
     />
   )
 }

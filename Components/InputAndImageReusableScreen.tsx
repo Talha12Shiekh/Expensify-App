@@ -6,6 +6,7 @@ import BackButton from '../Components/BackButton'
 import { RootStackParamsList } from '../navigation/AppNavigation'
 import { CustomButton } from '../Screens/WelcomeScreen';
 import { CATEGORIES } from '../Constants'
+import Loader from './Loader'
 
 
 interface InputAndImageReusableScreenProps {
@@ -85,7 +86,7 @@ const InputAndImageReusableScreen = ({ finputvalue, setfinputvalue, sinputvalue,
                             {
                                 CATEGORIES.map(({ title, value }: { title: string; value: string; }) => {
                                     const bgcolor = value === category ? "bg-green-200" : "bg-white";
-                                    return <TouchableOpacity onPress={() => setcategory && setcategory(value)} key={value} className={`rounded-full bg-white p-2 px-6 mr-2 ${bgcolor}`}>
+                                    return <TouchableOpacity onPress={() => setcategory && setcategory(value)} key={value} className={`rounded-full p-2 px-6 mr-2  ${bgcolor}`}>
 
                                         <Text className='text-lg'>{title}</Text>
                                     </TouchableOpacity>
@@ -95,7 +96,7 @@ const InputAndImageReusableScreen = ({ finputvalue, setfinputvalue, sinputvalue,
                     </View>}
                 </View>
                 <View className='mx-4'>
-                    {userLoading ? <Text>Loading... </Text> : <CustomButton
+                    {userLoading ? <Loader/> : <CustomButton
                         text={btntext}
                         onPress={onPress}
                     />}
