@@ -13,26 +13,7 @@ import { expensesRef } from "../Config/firebase";
 import { getDocs, query, where } from "firebase/firestore";
 
 
-const items = [
-  {
-    id: 1,
-    title: "ate sandwhich",
-    category: "food",
-    amount: 4
-  },
-  {
-    id: 2,
-    title: "bought a jacket",
-    category: "shopping",
-    amount: 100
-  },
-  {
-    id: 3,
-    title: "watched a movie",
-    category: "entertainment",
-    amount: 50
-  },
-]
+ 
 
 type TripsExpenseScreenProps = NativeStackScreenProps<RootStackParamsList, "TripsExpense">;
 
@@ -40,10 +21,9 @@ interface ExpensesDataType {
   title: string,
   amount: string,
   category: string,
-  tripId: number
+  id: string
 }
 
-// 
 
 
 const TripExpensesScreen: React.FC<TripsExpenseScreenProps> = ({ navigation, route }): React.JSX.Element => {
@@ -57,7 +37,8 @@ const TripExpensesScreen: React.FC<TripsExpenseScreenProps> = ({ navigation, rou
     const querySnapshot = await getDocs(q);
     let data: ExpensesDataType[] = [];
     querySnapshot.forEach(qry => {
-      data.push({ ...qry.data(), id: qry.id });
+      const expnenses = qry.data() as Omit<ExpensesDataType,"id">;
+      data.push({ ...expnenses, id: qry.id });
     });
     setexpenses(data);
   }

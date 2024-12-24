@@ -20,10 +20,11 @@ export type RootStackParamsList = {
     Home:undefined,
     AddTrip:undefined,
     SignUp:undefined,
-    AddExpense:undefined,
+    AddExpense:{id:string, place:string, country:string},
     TripsExpense:{
         place:string,
-        country:string
+        country:string,
+        id:string
     },
     Welcome:undefined
 }

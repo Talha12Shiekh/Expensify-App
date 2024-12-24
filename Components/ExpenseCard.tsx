@@ -3,10 +3,10 @@ import React from 'react';
 import { CategoryBG, colors } from '../Theme';
 
 interface ItemProps {
-    id: number,
+    id: string,
     title: string,
     category: string,
-    amount:number
+    amount:string
 }
 
 export type CategoryKeys = 'food' | 'commute' | 'entertainment' | 'shopping' | 'other';

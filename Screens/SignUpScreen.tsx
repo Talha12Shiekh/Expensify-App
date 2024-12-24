@@ -13,6 +13,9 @@ type NavigationProps = NativeStackScreenProps<RootStackParamsList, "SignUp">;
 
 // tk123@gmail.com
 // Tk123456
+
+// tks123@gmail.com
+// Tks123456
 const SignUpScreen: React.FC<NavigationProps> = ({ navigation }): React.JSX.Element => {
     const [email, setemail] = useState<string>("");
     const [password, setpassword] = useState<string>("");

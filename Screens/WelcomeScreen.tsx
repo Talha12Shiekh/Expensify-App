@@ -19,8 +19,8 @@ export const CustomButton = ({ text, onPress }: CustomButtonProps): React.JSX.El
   </TouchableOpacity>
 }
 
-
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }): React.JSX.Element => {
+
   return (
     <ScreenWrapper>
       <View className='h-full flex justify-around'>
